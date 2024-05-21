@@ -4,20 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Space Invaders | Jacazada</title>
+    <style>
+        body, html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 14px;
+            background-color: blanchedalmond;
+        }
+    </style>
 </head>
 <body>
-  <div id="parentDiv">
-    <p id="scoreContainer">
-        <span>Pontos:</span>
+    <div style="position: relative;" id="parentDiv">
+    <p 
+        id="scoreContainer"
+        style="
+            position: absolute;
+            z-index: 10;
+            color: blanchedalmond;
+            left: 10px;
+            top: 10px;
+            margin: 0;
+            display: flex;
+        "
+    >
+        <span> Pontos:</span>
         <span id="scoreEl">0</span>
+  
     </p>
     <canvas></canvas>
-    <div id="startScreen">
-    <div>
-        <h1>Space Inavders</h1>
-        <div id ="startButton">
+    <div 
+    id="startScreen"
+    style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('./img/startScreenBackground.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 20;
+    "
+    >
+
+    <div style="text-align: center;">
+        <h1 style="color: rgb(214, 214, 226);">Space Inavders</h1>
+        <div 
+            id ="startButton"
+            style="
+                cursor: pointer;
+                position: relative;
+                display: inline-block;
+            "
+        >
             <img src="./img/button.png" alt="Start Button">
-            <span>Iniciar</span>
+            <span
+                style="
+                    position: absolute;
+                    color: azure;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                "
+            >Iniciar</span>
         </div> <!--Fim do Id startButton-->
     </div>
     </div> <!--Fim do Id startScreen-->

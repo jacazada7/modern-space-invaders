@@ -77,12 +77,39 @@
         </div> <!--Fim do Id startButton-->
     </div>
     </div> <!--Fim do Id startScreen-->
-    <div id="restartScreen">
-        <div>
-            <h1>Game Over</h1>
-            <div id="restartButtton">
+    <div 
+        id="restartScreen"
+        style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./img/restartScreenBackground.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 20;
+            "
+    >
+        <div style="text-align: center;">
+            <h1 style="color: rgb(29, 28, 28);">Game Over</h1>
+            <div 
+                id="restartButtton"
+                style="cursor: pointer; position: relative; display: inline-block;"
+            >
                 <img src="./img/button.png" alt="Restart Button" />
-                <span>Reiniciar</span>
+                <span
+                style="
+                    position: absolute;
+                    color: whitesmoke;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                "
+                >Reiniciar</span>
             </div> <!--Fim do Id restartButtton-->
         </div>
     </div> <!--Fim do id restartScreen-->

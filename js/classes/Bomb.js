@@ -22,7 +22,41 @@ class Bomb {
         c.fillStyle = this.color;
         c.fill(); 
         c.restore();
-        
+    }
 
+    update() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+       this.draw
+        
+        if (
+            this.position.x + this.radius + this.velocity.x >= canvas.width ||
+            this.position.x - this.radius + this.velocity.x <= 0 
+
+        ) {
+            this.velocity.x = -this.velocity.x;
+        } else if(
+            this.position.y + this.radius + this.velocity.y >= canvas.height ||
+            this.position.y - this.radius + this.velocity.y <= 0
+        )
+        this.velocity.y = -this.velocity.y       
+    }
+
+    explode() {
+        audio.bomba.play();
+        this.active = true;
+        this.velocity.x = 0;
+        this.velocity.y = 0;
+
+        gsap.to(this, {
+            radius: 200,
+            color: "red"
+        });
+        
+        gsap.to(this, {
+            delay: 0.1,
+            opacity: 0,
+            duration: 0.15
+        });       
     }
 }

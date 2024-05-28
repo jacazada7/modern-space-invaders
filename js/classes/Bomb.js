@@ -81,3 +81,4 @@ class PowerUp {
         this.position.y += this.velocity.y;
         this.draw();
 }
+}

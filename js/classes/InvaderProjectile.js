@@ -6,4 +6,8 @@ class invaderProjectiles {
         this.height = 10;
   
     }
+    draw() {
+        c.fillStyle = "red";
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
 }

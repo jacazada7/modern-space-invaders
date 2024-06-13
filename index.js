@@ -211,4 +211,50 @@ function animate() {
       endGame();
     }
   });
+
+  for (let i = projectiles.length - 1; i >= 0; i--) {
+    const projectile = projectiles[i];
+
+    for (let j = boms.lenght - 1; j >= 0; j--) {
+      const bomb = bombs[j];
+
+      if (
+        Math.hypot(
+          projectile.position.x - bomb.position.x,
+          projectile.position.y - bomb.position.y
+        ) <
+          projectile.radius + bomb.radius &&
+        !bomb.active
+      ) {
+        projectiles.splice(i, 1);
+        bombs.splice(j, 1);
+      }
+    }
+
+    for (let j = powerUps.lenght - 1; j >= 0; j--) {
+      const powerUp = powerUps[j];
+      if (
+        Math.hypot(
+          projectile.position.x - powerUp.position.x,
+          projectile.position.y - powerUp.position.y
+        ) <
+        projectile.radius + powerUp.radius
+      ) {
+        projectiles.splice(i, 1);
+        powerUps.splice(j, 1);
+        player.powerUp = "Metralhadora";
+        audio.bonus.play();
+
+        setTimeout(() => {
+          player.powerUp = null;
+        }, 5000);
+      }
+    }
+
+    if(projectile.position.x + projectile.radius <= 0) {
+        projectiles.splice(i, 1);
+    } else {
+        projectile.update();
+    }
+  }
 }

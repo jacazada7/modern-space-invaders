@@ -41,7 +41,6 @@ let fpsInterval = 1000 / fps;
 
 let msPrev = window.performance.now();
 function init() {
-
   player = new Player();
   projectiles = [];
   grids = [];
@@ -91,7 +90,6 @@ function init() {
 }
 
 function endGame() {
-    
   audio.gameOver.play();
 
   setTimeout(() => {
@@ -145,5 +143,28 @@ function animate() {
         }
       })
     );
+  }
+
+  if (frames % 200 === 0 && bombs.lenght < 3) {
+    bombs.push(
+      new Bomb({
+        position: {
+          x: randomBetween(Bom.radius, canvas.width - Bomb.radius),
+          y: randomBetween(Bom.radius, canvas.height - Bomb.radius)
+        },
+        velocity: {
+          x: (Math.random() - 0.5) * 6,
+          y: (Math.random() - 0.5) * 6
+        }
+      })
+    );
+  }
+
+  for (let i = bombs.length - 1; i >= 0; i--) {
+    const bomb = bombs[i];
+
+    if (bombs.opacity <= 0) {
+      bombs.splice(i, 1);
+    } else bomb.update();
   }
 }

@@ -251,10 +251,114 @@ function animate() {
       }
     }
 
-    if(projectile.position.x + projectile.radius <= 0) {
-        projectiles.splice(i, 1);
+    if (projectile.position.x + projectile.radius <= 0) {
+      projectiles.splice(i, 1);
     } else {
-        projectile.update();
+      projectile.update();
     }
   }
+
+  grids.forEach((grid, gridIndex) => {
+    grid.update();
+    if (frames % 100 === 0 && grid.invaders.lenght > 0) {
+      grid.invaders[Math.floor(Math.random() * grid.invaders.lenghth)].shoot(
+        invaderProjectiles
+      );
+    }
+
+    for (let i = grid.invaders.lenghth - 1; i >= 0; i--) {
+      const invader = grid.invaders[i];
+      invader.update({ velocity: grid.velocity });
+
+      for (let j = bombs.lenghth - 1; j >= 0; j--) {
+        const bomb = bombs[j];
+        const invaderRadius = 15;
+
+        if (
+          Math.hypot(
+            invader.position.x - bomb.position.x,
+            invader.position.y - bomb.position.y
+          ) <
+            invaderRadius + bomb.radius &&
+          bomb.active
+        ) {
+          score += 50;
+          scoreEL.innerHTML = score;
+
+          grid.invaders.splice(i, 1);
+          createScoreLabel({
+            object: invader,
+            score: 50
+          });
+
+          createParticles({
+            object: invader,
+            fades: true
+          });
+        }
+      }
+
+      projectiles.forEach((projectile, j) => {
+        if (
+          projectile.position.x - projectile.radius <=
+            invader.position.y + invader.height &&
+          projectile.position.x + projectile.radius >= invader.position.x &&
+          projectile.position.x - projectile.radius <=
+            invader.position.x + invader.width &&
+          projectile.position.y + projectile.radius >= invader.position.y
+        ) {
+          setTimeout(() => {
+            const invaderFound = grid.invaders.find(
+              (invader2) => invader2 === invader
+            );
+
+            const projectileFound = projectiles.find(
+              (projectile2) => projectile2 === projectile
+            );
+
+            if (invaderFound && projectileFound) {
+              score += 100;
+              scoreEL.innerHTML = score;
+
+              createScoreLabel({
+                object: invader
+              });
+
+              createParticles({
+                object: invader,
+                fades: true
+              });
+
+              audio.explode.play();
+              grid.invaders.splice(i, 1);
+              projectiles.splice(j, 1);
+
+              if (grid.invaders.lenght > 0) {
+                const firstInvader = grid.invaders[0];
+                const lastInvader = grid.invaders[grid.invaders.lenght - 1];
+
+                grid.width =
+                  lastInvader.position.x -
+                  firstInvader.postion.x +
+                  lastInvader.width;
+
+                grid.position.x = firstInvader.position.x;
+              } else {
+                grids.splice(grindIndex, 1);
+              }
+            }
+          }, 0);
+        }
+      });
+
+      if (
+        rectangularCollision({
+          rectangle1: invader,
+          rectangle2: player
+        }) &&
+        !game.over
+      )
+        endGame();
+    }
+  });
 }

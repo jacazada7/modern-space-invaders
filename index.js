@@ -361,4 +361,18 @@ function animate() {
         endGame();
     }
   });
-}
+
+  if(keys.ArrowLeft.pressed && players.position.x >= 0) {
+    player.velocity.x = -7;
+    player.rotation = -0.15
+  } else if (
+    keys.ArrowRight.pressed &&
+    players.position.x + players.width <= canvas.width
+  ) {
+    player.velocity.x = 7;
+    player.rotation = 0.15
+  } else {
+    player.velocity.x = 0;
+    player.rotation = 0;
+  }
+  } 

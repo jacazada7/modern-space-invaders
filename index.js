@@ -426,3 +426,49 @@ frames++;
     init();
     animate();
   });
+
+  addEventListener("keydown", ({ key }) => {
+    if(game.over) return;
+
+    switch(key) {
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = true;
+        break;
+      case "ArrowRight":
+        keys.ArrowRight.pressed = true;
+        break;
+      case " ":
+        keys.space.pressed = true;
+        
+        if(player.powerUp === "Metralhadora") return;
+
+        audio.shoot.play();
+        projectiles.push(
+          new Projectile({
+            position: {
+              x: player.position.x + player.width / 2,
+              y: player.position.y
+            },
+            velocity: {
+              x: 0,
+              y: -10
+            }
+          })
+        );
+        break;
+      }
+      });
+
+      addEventListener("keyup", ({ key }) => {
+        switch(key) {
+          case "ArrowLeft":
+            keys.ArrowLeft.pressed = false;
+            break;
+          case "ArrowRight":
+            keys.ArrowRight.pressed = false;
+            break;
+          case " ":
+            keys.space.pressed = false;
+            break;
+        }
+      });

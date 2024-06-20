@@ -1,5 +1,5 @@
 function randomBetween(min, max) {
-  return Math.random() * (max - min + 1) + min;
+  return Math.random() * (max - min) + min;
 }
 
 function createScoreLabel({ score = 100, object }) {
@@ -7,8 +7,8 @@ function createScoreLabel({ score = 100, object }) {
   scoreLabel.innerHTML = score;
   scoreLabel.style.position = "absolute";
   scoreLabel.style.color = "white";
-  scoreLabel.style.left = object.position.x + "px";
   scoreLabel.style.top = object.position.y + "px";
+  scoreLabel.style.left = object.position.x + "px";
   scoreLabel.style.userSelect = "none";
 
   document.querySelector("#parentDiv").appendChild(scoreLabel);
@@ -23,16 +23,17 @@ function createScoreLabel({ score = 100, object }) {
   });
 }
 
-function retangularCollision({ rectangle1, rectangle2 }) {
+function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
     rectangle1.position.y + rectangle1.height >= rectangle2.position.y &&
     rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&
     rectangle1.position.x <= rectangle2.position.x + rectangle2.width
   );
 }
+
 function createParticles({ object, color, fades }) {
   for (let i = 0; i < 15; i++) {
-    createParticles.push(
+    particles.push(
       new Particle({
         position: {
           x: object.position.x + object.width / 2,
@@ -43,7 +44,7 @@ function createParticles({ object, color, fades }) {
           y: (Math.random() - 0.5) * 2
         },
         radius: Math.random() * 3,
-        color: color || "#BAAODE",
+        color: color || "#BAA0DE",
         fades
       })
     );

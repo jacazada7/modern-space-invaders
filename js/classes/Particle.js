@@ -1,4 +1,3 @@
-
 class Particle {
   constructor({ position, velocity, radius, color, fades }) {
     this.position = position;

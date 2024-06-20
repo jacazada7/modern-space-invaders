@@ -1,14 +1,14 @@
 {
-    "singleQuote": false, 
-     "semi": true,
-     "trailingComma": "none",
-     "overrides": [
-        {
-            "files": "*.html",
-             "options": {
-                "parser": "html"
-             }
-        }
-     ]
-
-}
+   "singleQuote": false,
+   "semi": true,
+   "trailingComma": "none",
+   "overrides": [
+     {
+       "files": "*.html",
+       "options": { 
+         "parser": "html"
+       }
+     }
+   ]
+ }
+ 
